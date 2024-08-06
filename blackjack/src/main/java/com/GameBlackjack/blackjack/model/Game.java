@@ -6,6 +6,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Document(collection = "games")
 public class Game {
@@ -18,7 +19,7 @@ public class Game {
     private boolean isActive;
     private int currentPlayerIndex;
 
-    public void starGame(List<Player> players) {
+    public void startGame(List<Player> players) {
         this.players = players;
         this.deck = new Deck();
        // this.deck.initializeDeck();
@@ -95,6 +96,73 @@ public class Game {
 
     }
 
+    public List<Player>determineWinners(){
+        int dealerHandValue = getHandValue(dealer.getHand());
 
+        // Filtrar jugadores que no han excedido 21
+        List<Player> activePlayers = players.stream()
+                .filter(player -> getHandValue(player.getHands()) <= 21)
+                .collect(Collectors.toList());
 
+        // Determinar ganadores
+        List<Player> winners = activePlayers.stream()
+                .filter(player -> {
+                    int playerHandValue = getHandValue(player.getHands());
+                    return (playerHandValue > dealerHandValue || dealerHandValue > 21) && playerHandValue <= 21;
+                })
+                .collect(Collectors.toList());
+
+        // Actualizar puntuacion de los ganadores
+        winners.forEach(winner -> winner.setScore(winner.getScore() + winner.getBet()));
+
+        return winners;
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public List<Player> getPlayers() {
+        return players;
+    }
+
+    public void setPlayers(List<Player> players) {
+        this.players = players;
+    }
+
+    public Deck getDeck() {
+        return deck;
+    }
+
+    public void setDeck(Deck deck) {
+        this.deck = deck;
+    }
+
+    public Dealer getDealer() {
+        return dealer;
+    }
+
+    public void setDealer(Dealer dealer) {
+        this.dealer = dealer;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
+    public int getCurrentPlayerIndex() {
+        return currentPlayerIndex;
+    }
+
+    public void setCurrentPlayerIndex(int currentPlayerIndex) {
+        this.currentPlayerIndex = currentPlayerIndex;
+    }
 }

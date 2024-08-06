@@ -1,2 +1,7 @@
-package com.GameBlackjack.blackjack.repository;public interface PlayerRepository {
+package com.GameBlackjack.blackjack.repository;
+
+import com.GameBlackjack.blackjack.model.Player;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface PlayerRepository extends JpaRepository<Player, Long> {
 }

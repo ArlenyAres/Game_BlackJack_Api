@@ -1,21 +1,34 @@
 package com.GameBlackjack.blackjack.model;
 
 
+import io.swagger.v3.oas.annotations.media.Schema;
 import jakarta.persistence.*;
 
 import java.util.List;
 
 @Entity
+@Schema(description = "Details about the player")
 public class Player {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Schema(description = "The unique ID of the player", example = "1")
     private long id;
+
+    @Schema(description = "The name of the player", example = "John Doe")
     private String name;
+
+    @Schema(description = "The score of the player", example = "100")
     private int score;
+
+    @Schema(description = "The bet of the player", example = "50")
     private int bet;
+
+    @Schema(description = "The playing status of the player", example = "true")
     private boolean isPlaying;
+
     @Transient
+    @Schema(description = "The cards in the player's hand")
     private List<Card> hands;
 
     public long getId() {
