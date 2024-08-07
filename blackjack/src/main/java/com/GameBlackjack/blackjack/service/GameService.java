@@ -59,9 +59,13 @@ public class GameService {
         return gameRepository.findById(gameId)
                 .switchIfEmpty(Mono.error(new ResourceNotFoundException("Game not found")))
                 .flatMap(game -> {
-                    game.placeBet(playerId, amount);
-                    return gameRepository.save(game).then();
-                });
+                    Player player = game.getPlayers().stream()
+                            .filter(p -> p.getId() == playerId)
+                            .findFirst()
+                            .orElseThrow(() -> new ResourceNotFoundException("Player not found with id: " + playerId));
+
+                    player.setBet(amount);
+                    return gameRepository.save(game).then(playerService.updatePlayerBet(playerId, amount));                });
     }
 
     public Mono<Void> dealerTurn(String gameId) {

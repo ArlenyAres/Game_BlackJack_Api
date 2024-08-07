@@ -29,4 +29,22 @@ public class PlayerService {
     public Mono<Player> updatePlayer(Player player) {
         return Mono.just(playerRepository.save(player));
     }
+
+    public Mono<Void> updatePlayerBet(Long playerId, int bet) {
+        return Mono.justOrEmpty(playerRepository.findById(playerId))
+                .flatMap(player -> {
+                    player.setBet(bet);
+                    playerRepository.save(player);
+                    return Mono.empty();
+                });
+    }
+
+    public Mono<Void> updatePlayerScore(Long playerId, int score) {
+        return Mono.justOrEmpty(playerRepository.findById(playerId))
+                .flatMap(player -> {
+                    player.setScore(score);
+                    playerRepository.save(player);
+                    return Mono.empty();
+                });
+    }
 }
