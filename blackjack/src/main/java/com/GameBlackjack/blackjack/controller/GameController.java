@@ -47,8 +47,8 @@ public class GameController {
             @ApiResponse(responseCode = "200", description = "Hit recorded successfully"),
             @ApiResponse(responseCode = "404", description = "Game not found")
     })
-    public Mono<Void> playerHit(@PathVariable String id) {
-        return gameService.playerHit(id);
+    public Mono<Void> playerHit(@PathVariable String id, @RequestParam Long playerId) {
+        return gameService.playerHit(id, playerId);
     }
 
     @PostMapping("/{id}/stand")

@@ -2,6 +2,7 @@ package com.GameBlackjack.blackjack.model;
 
 
 import com.GameBlackjack.blackjack.exception.ResourceNotFoundException;
+import io.swagger.v3.oas.annotations.media.Schema;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,14 +10,26 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Document(collection = "games")
+@Schema(description = "Details about the Blackjack game")
 public class Game {
 
     @Id
+    @Schema(description = "Unique identifier of the game", example = "507f1f77bcf86cd799439011")
     private String id;
+
+    @Schema(description = "List of players in the game")
     private List<Player> players;
+
+    @Schema(description = "Deck of cards used in the game")
     private Deck deck;
+
+    @Schema(description = "Dealer handling the game")
     private Dealer dealer;
+
+    @Schema(description = "Status of the game", example = "true")
     private boolean isActive;
+
+    @Schema(description = "Index of the current player", example = "0")
     private int currentPlayerIndex;
 
     public void startGame(List<Player> players) {
@@ -50,15 +63,23 @@ public class Game {
         }
     }
 
-    public void playerHit(){
-
-        Player currentPlayer = getCurrentPlayer();
-        currentPlayer.getHands().add(deck.draw());
-
-        if(getHandValue(currentPlayer.getHands()) > 21){
-            currentPlayer.setPlaying(false);
+    public void playerHit(Player player) {
+        player.getHands().add(deck.draw());
+        if (getHandValue(player.getHands()) > 21) {
+            player.setPlaying(false);
         }
     }
+
+
+//    public void playerHit(){
+//
+//        Player currentPlayer = getCurrentPlayer();
+//        currentPlayer.getHands().add(deck.draw());
+//
+//        if(getHandValue(currentPlayer.getHands()) > 21){
+//            currentPlayer.setPlaying(false);
+//        }
+//    }
 
 //    public void playerStand(){
 //        Player currentPlayer = getCurrentPlayer();
@@ -99,12 +120,12 @@ public class Game {
     public List<Player>determineWinners(){
         int dealerHandValue = getHandValue(dealer.getHand());
 
-        // Filtrar jugadores que no han excedido 21
+
         List<Player> activePlayers = players.stream()
                 .filter(player -> getHandValue(player.getHands()) <= 21)
                 .collect(Collectors.toList());
 
-        // Determinar ganadores
+
         List<Player> winners = activePlayers.stream()
                 .filter(player -> {
                     int playerHandValue = getHandValue(player.getHands());
@@ -112,7 +133,7 @@ public class Game {
                 })
                 .collect(Collectors.toList());
 
-        // Actualizar puntuacion de los ganadores
+
         winners.forEach(winner -> winner.setScore(winner.getScore() + winner.getBet()));
 
         return winners;

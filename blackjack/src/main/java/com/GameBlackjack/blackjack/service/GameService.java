@@ -37,11 +37,16 @@ public class GameService {
                 .switchIfEmpty(Mono.error(new ResourceNotFoundException("Game not found")));
     }
 
-    public Mono<Void> playerHit(String gameId) {
+    public Mono<Void> playerHit(String gameId, Long playerId) {
         return gameRepository.findById(gameId)
                 .switchIfEmpty(Mono.error(new ResourceNotFoundException("Game not found")))
                 .flatMap(game -> {
-                    game.playerHit();
+                    Player player = game.getPlayers().stream()
+                            .filter(p -> p.getId() == playerId)
+                            .findFirst()
+                            .orElseThrow(() -> new ResourceNotFoundException("Player not found with id: " + playerId));
+
+                    game.playerHit(player);
                     return gameRepository.save(game).then();
                 });
     }
@@ -67,6 +72,7 @@ public class GameService {
                     player.setBet(amount);
                     return gameRepository.save(game).then(playerService.updatePlayerBet(playerId, amount));                });
     }
+
 
     public Mono<Void> dealerTurn(String gameId) {
         return gameRepository.findById(gameId)
