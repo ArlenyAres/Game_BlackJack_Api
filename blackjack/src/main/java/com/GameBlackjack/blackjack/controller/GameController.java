@@ -1,5 +1,6 @@
 package com.GameBlackjack.blackjack.controller;
 
+import com.GameBlackjack.blackjack.exception.ResourceNotFoundException;
 import com.GameBlackjack.blackjack.model.Game;
 import com.GameBlackjack.blackjack.model.Player;
 import com.GameBlackjack.blackjack.service.GameService;
@@ -8,6 +9,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import reactor.core.publisher.Mono;
 
@@ -97,7 +100,14 @@ public class GameController {
             @ApiResponse(responseCode = "200", description = "Game deleted successfully"),
             @ApiResponse(responseCode = "404", description = "Game not found")
     })
-    public Mono<Void> deleteGame(@PathVariable String id) {
-        return gameService.deleteGame(id);
+    public Mono<ResponseEntity<String>> deleteGame(@PathVariable String id) {
+        return gameService.deleteGame(id)
+                .then(Mono.just(ResponseEntity.ok("Game deleted successfully")))
+                .onErrorResume(ResourceNotFoundException.class, e ->
+                        Mono.just(ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage()))
+                );
     }
+
+
+
 }

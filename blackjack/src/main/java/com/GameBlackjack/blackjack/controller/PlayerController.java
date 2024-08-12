@@ -57,11 +57,12 @@ public class PlayerController {
             @ApiResponse(responseCode = "400", description = "Invalid id supplied"),
             @ApiResponse(responseCode = "404", description = "Player not found")
     })
-    public Mono<Player> updatePlayerName(@PathVariable Long playerId, @RequestBody String newName) {
+    public Mono<Player> updatePlayerName(@PathVariable Long playerId, @RequestBody Player updatedPlayer) {
         return playerService.getPlayer(playerId)
-                .flatMap(player -> {
-                    player.setName(newName);
-                    return playerService.savePlayer(player);
+                .flatMap(existingPlayer -> {
+                    existingPlayer.setName(updatedPlayer.getName());
+                    return playerService.savePlayer(existingPlayer);
                 });
     }
+
 }

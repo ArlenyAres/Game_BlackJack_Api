@@ -95,6 +95,10 @@ public class GameService {
     }
 
     public Mono<Void> deleteGame(String gameId) {
-        return gameRepository.deleteById(gameId);
+        return gameRepository.findById(gameId)
+                .flatMap(game -> gameRepository.delete(game));
+              //  .switchIfEmpty(Mono.error(new ResourceNotFoundException("Game not found")));
     }
+
+
 }
