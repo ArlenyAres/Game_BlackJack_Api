@@ -75,8 +75,6 @@
 			<scope>test</scope>
 		</dependency>
 
-
-
 		<!-- Springdoc OpenAPI Dependency -->
 		<dependency>
 			<groupId>org.springdoc</groupId>

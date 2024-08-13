@@ -10,6 +10,8 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.web.server.SecurityWebFilterChain;
 import org.springframework.security.web.server.csrf.CookieServerCsrfTokenRepository;
 
+import static org.springframework.security.config.Customizer.withDefaults;
+
 @Configuration
 @EnableWebFluxSecurity
 public class SecurityConfig {
@@ -17,27 +19,14 @@ public class SecurityConfig {
 //    @Bean
 //    public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
 //        http
-//                .csrf().csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse())
-//                .and()
+//                .csrf(csrf -> csrf.csrfTokenRepository(CookieServerCsrfTokenRepository.withHttpOnlyFalse()))
 //                .authorizeExchange(exchanges -> exchanges
-//                        .pathMatchers("/public/**").permitAll() // Permitir acceso público a ciertos endpoints
-//                        .anyExchange().authenticated()
+//                        .pathMatchers("/public/**").permitAll()
 //                )
-//                .httpBasic(); // Permitir autenticación
+//                .httpBasic(withDefaults());
 //
 //        return http.build();
 //    }
-
-//    @Bean
-//    public MapReactiveUserDetailsService userDetailsService() {
-//        UserDetails user = User.withDefaultPasswordEncoder()
-//                .username("user")
-//                .password("password")
-//                .roles("USER")
-//                .build();
-//        return new MapReactiveUserDetailsService(user);
-//    }
-
 
     @Bean
     public SecurityWebFilterChain securityWebFilterChain(ServerHttpSecurity http) {
@@ -48,4 +37,6 @@ public class SecurityConfig {
                 );
         return http.build();
     }
+
+
 }

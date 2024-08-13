@@ -1,0 +1,13 @@
+target/
+.gitignore
+.git
+*.log
+*.iml
+.idea/
+*.class
+*.jar
+*.war
+*.ear
+.DS_Store
+node_modules/
+.mvn/
