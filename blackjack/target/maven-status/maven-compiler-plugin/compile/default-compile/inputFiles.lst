@@ -1,0 +1,16 @@
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/BlackjackApplication.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/config/OpenApiConfig.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/config/SecurityConfig.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/controller/GameController.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/controller/PlayerController.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/exception/GlobalExceptionHandler.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/exception/ResourceNotFoundException.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/model/Card.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/model/Dealer.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/model/Deck.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/model/Game.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/model/Player.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/repository/GameRepository.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/repository/PlayerRepository.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/service/GameService.java
+/Users/Ares/IdeaProjects/ItAcademy2024/Game_BlackJack_Api/blackjack/src/main/java/com/GameBlackjack/blackjack/service/PlayerService.java
