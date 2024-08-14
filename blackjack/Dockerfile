@@ -19,3 +19,5 @@ EXPOSE 8080
 
 # Ejecutar la aplicación
 CMD ["java", "-jar", "blackjack.jar"]
+
+

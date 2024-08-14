@@ -15,9 +15,10 @@ services:
       SPRING_DATASOURCE_URL: jdbc:mysql://mysql:3306/blackjack
       SPRING_DATASOURCE_USERNAME: root
       SPRING_DATASOURCE_PASSWORD: root
+
       SPRING_DATA_MONGODB_HOST: mongodb
       SPRING_DATA_MONGODB_PORT: 27017
-      SPRING_DATA_MONGODB_DATABASE: blackjack
+      SPRING_DATA_MONGODB_DATABASE: blackjack/games
 
   mongodb:
     image: mongo:latest
@@ -39,3 +40,4 @@ services:
 volumes:
   mongo-data:
   mysql-data:
+
